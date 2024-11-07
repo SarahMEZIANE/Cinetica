@@ -30,7 +30,7 @@ export default function LoginPage() {
     mediaQuery.addEventListener("change", updateTheme);
 
     return () => mediaQuery.removeEventListener("change", updateTheme);
-  }, [isDarkMode, isLogged]);
+  }, []);
 
   const handleClick = async (event: React.FormEvent) => {
     setError("");
