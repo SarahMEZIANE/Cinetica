@@ -1,101 +1,91 @@
-import Image from "next/image";
+// app/page.tsx
+"use client";
 
-export default function Home() {
+import { useEffect, useState } from 'react';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useRouter } from 'next/navigation';
+
+export default function LoginPage() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [username, setUsername] = useState("");
+  const [isLogged, setIsLogged] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); 
+  const router=useRouter();
+
+  useEffect(() => {
+    const updateTheme = () => {
+      const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setIsDarkMode(prefersDarkMode);
+      if (prefersDarkMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    };
+    updateTheme();
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", updateTheme);
+
+    return () => mediaQuery.removeEventListener("change", updateTheme);
+  }, []);
+
+  const handleClick = async (event: React.FormEvent) => {
+    setError("");
+    event.preventDefault()
+    try {
+      const response = await fetch("./api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      if (response.status==200) {
+        const data = await response.json();
+        console.log("Connexion réussie :", data);
+        setIsLogged(true);
+        router.push('/dashboard');
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || "Erreur de connexion"); 
+      }
+    } catch (error) {
+      console.error("Erreur lors de la connexion :", error);
+      setError("Impossible de se connecter au serveur.");
+    }
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className={`p-6 flex bg-[#fec04b] bg-cover bg-center items-center justify-center min-h-screen sm:dark:bg-[url('./img/bg-bw.jpg')] sm:bg-[url('./img/bg.jpg')]`}>
+      <div className='flex-[2]'></div>
+      <div className="p-6 m-10 flex-1 rounded-lg shadow-lg bg-white dark:bg-black w-80">
+        <div id="logo" className="flex justify-center mb-4">
+          <div className="bg-[url('./img/logo.png')] bg-cover h-24 w-24 bg-center bg-transparent  p-3">
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div id="form">
+        <form className="space-y-4" >
+          <div>
+            <label className="block text-gray-700 dark:text-white">Username</label>
+            <Input type="text" placeholder="Enter Username"  name="user" className='dark:bg-white dark:text-black' onChange={(e)=>setUsername(e.target.value)} required/>
+          </div>
+          <div>
+            <label className="block text-gray-700 dark:text-white">Password</label>
+            <Input type="password" placeholder="Enter Password" name='pass' className='dark:bg-white dark:text-black' onChange={(e)=>setPassword(e.target.value)} required/>
+          </div>
+          {error && (
+            <label className="text-red-500 m-4">Password  or username incorrect</label>
+          )
+          }
+          <Button type="submit" onClick={handleClick}  className="w-full bg-[#fec04b] hover:bg-yellow-600 dark:bg-[#fec04b] dark:hover:bg-yellow-700 text-white font-bold">
+            Login
+          </Button>
+        </form>
+        </div>
+      </div>
     </div>
   );
 }
