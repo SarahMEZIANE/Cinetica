@@ -18,6 +18,7 @@ export default function LoginPage() {
     const updateTheme = () => {
       const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
       setIsDarkMode(prefersDarkMode);
+      if(isDarkMode && isLogged){}
       if (prefersDarkMode) {
         document.documentElement.classList.add("dark");
       } else {
