@@ -2,7 +2,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Home, Star, Tv, Film, TrendingUp, Eye, LogOut } from "lucide-react"; // Assurez-vous d'importer les bonnes icônes
+import { Home, Star, Tv, Film, TrendingUp, Eye, LogOut } from "lucide-react";
 import { useState } from "react";
 
 export default function Dashboard() {
