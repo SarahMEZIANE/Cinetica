@@ -4,6 +4,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  height: 1vh;
 }
 
 @layer utilities {
@@ -95,4 +96,25 @@ body {
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
+}
+
+/* styles/globals.css */
+
+/* Styles pour la scrollbar */
+::-webkit-scrollbar {
+  width: 8px;  /* Largeur de la scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #fec04b;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fec04b; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e08f0b;
 }
