@@ -18,19 +18,16 @@ export default function Dashboard() {
     { name: "Top rated", icon: <Star className="w-5 h-5" />, section: "tv" },
   ];
 
-  // Toggle sidebar visibility
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-[#494949]">
-      {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-30 w-64 bg-black text-gray-200 p-6 shadow-lg transform transition-transform lg:translate-x-0 
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:relative lg:flex lg:flex-col`}
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold text-[#fec04b]">Cinetica</h2>
-          {/* Close button on mobile */}
           <Button onClick={toggleSidebar} className="text-[#fec04b] lg:hidden">
             <X className="w-6 h-6" />
           </Button>
@@ -112,7 +109,7 @@ export default function Dashboard() {
           <Button onClick={toggleSidebar} className="text-[#fec04b] lg:hidden">
             {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </Button>
-          <h1 className="text-3xl font-semibold text-gray-700">En cours de developpement ...</h1>
+          <h1 className="text-3xl font-semibold text-gray-700 dark:text-white">En cours de developpement ...</h1>
         </header>
 
       </main>
