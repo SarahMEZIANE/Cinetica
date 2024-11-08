@@ -1,7 +1,7 @@
-// app/ClientLayout.tsx (Client component, with "use client")
+// app/ClientLayout.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { ThemeProvider } from "next-themes";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -18,37 +18,15 @@ const geistMono = localFont({
 
 export default function ClientLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const updateTheme = () => {
-        const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        setIsDarkMode(prefersDarkMode);
-
-        if (prefersDarkMode) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-      };
-
-      updateTheme();
-
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      mediaQuery.addEventListener("change", updateTheme);
-
-      return () => mediaQuery.removeEventListener("change", updateTheme);
-    }
-  }, [isDarkMode]);
-
+}) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

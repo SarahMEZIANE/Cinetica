@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Dashboard() {
   const [active, setActive] = useState("main-Discover");
-  const [sidebarOpen, setSidebarOpen] = useState(false); // Sidebar toggle state
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navItems = [
     { name: "Discover", icon: <Home className="w-5 h-5" />, section: "main" },
@@ -23,7 +23,6 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-[#494949]">
 
-      {/* Header */}
       <header className="flex items-center justify-between px-6 py-2 bg-black text-gray-200 shadow-lg">
         <div className="flex items-center space-x-4">
           <h2 className="text-2xl font-bold text-[#fec04b]">Cinetica</h2>
@@ -34,12 +33,11 @@ export default function Dashboard() {
         <input
           type="text"
           placeholder="Search..."
-          className="hidden sm:block p-2 w-full max-w-xs bg-white rounded-lg focus:outline-none text-black"
+          className="w-60 sm:w-full p-2 max-w-xs bg-white rounded-lg focus:outline-none text-black"
         />
       </header>
 
       <div className="flex flex-1">
-        {/* Sidebar */}
         <aside
           className={`fixed inset-y-0 left-0 z-30 w-64 bg-black text-gray-200 p-6 shadow-lg transform transition-transform lg:translate-x-0 
             ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:relative lg:flex lg:flex-col`}
@@ -77,7 +75,7 @@ export default function Dashboard() {
                 <Button
                   key={`${item.section}-${item.name}`}
                   onClick={() => setActive(`${item.section}-${item.name}`)}
-                  className={`justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
+                  className={`hover:bg-[#fec04b] hover:text-white justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
                     active === `${item.section}-${item.name}`
                       ? "bg-[#fec04b] text-gray-900"
                       : "hover:bg-[#fec04b] hover:text-white"
@@ -97,7 +95,7 @@ export default function Dashboard() {
                 <Button
                   key={`${item.section}-${item.name}`}
                   onClick={() => setActive(`${item.section}-${item.name}`)}
-                  className={`justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
+                  className={`hover:bg-[#fec04b] hover:text-white justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
                     active === `${item.section}-${item.name}`
                       ? "bg-[#fec04b] text-gray-900"
                       : "hover:bg-[#fec04b] hover:text-white"
