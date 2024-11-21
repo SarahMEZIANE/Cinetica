@@ -1,36 +1,19 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [username, setUsername] = useState("");
   const [isLogged, setIsLogged] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); 
   const router=useRouter();
 
-  useEffect(() => {
-    const updateTheme = () => {
-      const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setIsDarkMode(prefersDarkMode);
-      if(isDarkMode && isLogged){}
-      if (prefersDarkMode) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    };
-    updateTheme();
+  if(isLogged){}
 
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", updateTheme);
-
-    return () => mediaQuery.removeEventListener("change", updateTheme);
-  }, []);
 
   const handleClick = async (event: React.FormEvent) => {
     setError("");
