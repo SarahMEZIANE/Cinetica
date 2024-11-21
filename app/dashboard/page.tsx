@@ -26,7 +26,7 @@ export default function Dashboard() {
       <header className="flex items-center justify-between px-6 py-2 bg-white dark:bg-[#333333] text-gray-800 dark:text-gray-200 shadow-lg">
         <div className="flex items-center space-x-4">
           <h2 className="text-2xl font-bold text-[#fec04b] dark:text-[#fec04b]">Cinetica</h2>
-          <Button onClick={toggleSidebar} className="text-[#fec04b] dark:text-[#fec04b] lg:hidden">
+          <Button onClick={toggleSidebar} className="bg-transparent text-[#fec04b] dark:text-[#fec04b] lg:hidden">
             {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </Button>
         </div>
@@ -55,7 +55,7 @@ export default function Dashboard() {
                 <Button
                   key={`${item.section}-${item.name}`}
                   onClick={() => setActive(`${item.section}-${item.name}`)}
-                  className={`hover:bg-[#fec04b] hover:text-white justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
+                  className={`hover:bg-[#fec04b] hover:text-white bg-white text-black dark:text-white dark:bg-[#494949] justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
                     active === `${item.section}-${item.name}`
                       ? "bg-[#fec04b] text-gray-900 dark:bg-[#fec04b] dark:text-gray-900"
                       : "hover:bg-[#fec04b] hover:text-white"
@@ -75,7 +75,7 @@ export default function Dashboard() {
                 <Button
                   key={`${item.section}-${item.name}`}
                   onClick={() => setActive(`${item.section}-${item.name}`)}
-                  className={`hover:bg-[#fec04b] hover:text-white justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
+                  className={`hover:bg-[#fec04b] hover:text-white bg-white text-black dark:text-white dark:bg-[#494949] justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
                     active === `${item.section}-${item.name}`
                       ? "bg-[#fec04b] text-gray-900 dark:bg-[#fec04b] dark:text-gray-900"
                       : "hover:bg-[#fec04b] hover:text-white"
@@ -95,7 +95,7 @@ export default function Dashboard() {
                 <Button
                   key={`${item.section}-${item.name}`}
                   onClick={() => setActive(`${item.section}-${item.name}`)}
-                  className={`hover:bg-[#fec04b] hover:text-white justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
+                  className={`hover:bg-[#fec04b] hover:text-white bg-white text-black dark:text-white dark:bg-[#494949] justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
                     active === `${item.section}-${item.name}`
                       ? "bg-[#fec04b] text-gray-900 dark:bg-[#fec04b] dark:text-gray-900"
                       : "hover:bg-[#fec04b] hover:text-white"
@@ -110,7 +110,7 @@ export default function Dashboard() {
           <div className="pt-40 flex-shrink-0">
             <Button
               onClick={() => setActive("logout")}
-              className="hover:bg-[#fec04b] hover:text-white sm:justify-start text-left sm:flex items-center space-x-3 sm:px-4 sm:py-3 rounded-lg"
+              className="hover:bg-[#fec04b] hover:text-white bg-white text-black dark:text-white dark:bg-[#494949] sm:justify-start text-left sm:flex items-center space-x-3 sm:px-4 sm:py-3 rounded-lg"
             >
               <LogOut className="w-5 h-5" />
               <span>Logout</span>
