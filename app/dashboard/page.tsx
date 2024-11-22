@@ -4,8 +4,8 @@ import DashboardLayout from "@/app/dashboard/DashboardLayout";
 const DashboardPage = () => {
   return (
     <DashboardLayout>
-      <h1 className="text-3xl">Bienvenue dans le tableau de bord</h1>
-    </DashboardLayout>
+          <h1 className="text-3xl font-semibold text-gray-700 dark:text-white">En cours de développement ...</h1>
+          </DashboardLayout>
   );
 };
 

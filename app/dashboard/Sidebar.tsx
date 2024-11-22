@@ -14,7 +14,7 @@ export const Sidebar = ({
   setActive: (value: string) => void;
 }) => {
   return (
-    <div className="flex flex-1">
+    <div className="flex">
         <aside
           className={`overflow-y-scroll sm:overflow-auto fixed inset-y-0 left-0 z-30 w-64 bg-white dark:bg-[#333333] text-gray-800 dark:text-gray-200 p-6 shadow-lg transform transition-transform lg:translate-x-0 
             ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:relative lg:flex lg:flex-col`}

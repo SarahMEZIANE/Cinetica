@@ -15,7 +15,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           active={active}
           setActive={setActive}
         />
-        <main className="flex-1 p-10 lg:ml-64">{children}</main>
+        <main className="flex-1 p-10 lg:ml-64">
+          {children}
+        </main>
       </div>
     </div>
   );
