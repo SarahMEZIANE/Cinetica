@@ -17,7 +17,7 @@ const MoviesPage = () => {
   return (
     <div>
       <h1 className="text-2xl text-center my-6">Now Playing Movies</h1>
-      <MovieGrid movies={movies} loading={loading} error={error} />
+      <MovieGrid fetchMovies={ fetchMovies } movies={movies} loading={loading} error={error} />
 
       <div className="flex justify-center mt-6 space-x-4 p-4">
         <button
