@@ -1,6 +1,6 @@
 import Sidebar from "@/app/dashboard/Sidebar";
 import Header from "@/app/dashboard/Header";
-import { useDashboardState } from "@/app/dashboard/useDashboardState";
+import { useDashboardState } from "@/hooks/useDashboardState";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { sidebarOpen, toggleSidebar, active, setActive } = useDashboardState();
@@ -15,9 +15,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           active={active}
           setActive={setActive}
         />
-        <main className="flex-1 p-10 lg:ml-64">
           {children}
-        </main>
       </div>
     </div>
   );

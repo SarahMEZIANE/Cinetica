@@ -20,7 +20,7 @@ const Form = ({
   handleSubmit: (e: React.FormEvent) => void;
 }) => {
   return (
-    <form className="space-y-4" onSubmit={handleSubmit}>
+    <form className="space-y-4">
     <div id="logo" className="flex justify-center mb-4">
       <Logo />
     </div>
@@ -48,8 +48,7 @@ const Form = ({
       </div>
       {error && <p className="text-red-500 m-4">{error}</p>}
       <Button
-        type="submit"
-        className="w-full bg-[#fec04b] hover:bg-yellow-600 dark:bg-[#fec04b] dark:hover:bg-yellow-700 text-white font-bold"
+        onClick={handleSubmit} className="w-full bg-[#fec04b] hover:bg-yellow-600 dark:bg-[#fec04b] dark:hover:bg-yellow-700 text-white font-bold"
       >
         Login
       </Button>

@@ -1,7 +1,7 @@
 "use client";
 
 import Form from "@/app/login/Form";
-import { useLogin } from "@/app/login/useLogin";
+import { useLogin } from "@/hooks/useLogin";
 
 export default function LoginPage() {
   const { username, setUsername, password, setPassword, error, handleSubmit } =
