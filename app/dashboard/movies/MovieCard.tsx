@@ -9,6 +9,7 @@ interface MovieCardProps {
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ title, posterPath, rating }) => {
+  
   const posterUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
 
   return (
