@@ -1,7 +1,7 @@
 // /lib/auth.ts
 import { DefaultSession, AuthOptions } from 'next-auth';
-import { credentialsProvider } from './providers';  // Import du provider
-import { jwtCallback, sessionCallback } from './auth-callbacks';  // Import des callbacks
+import { credentialsProvider } from './providers'; 
+import { jwtCallback, sessionCallback } from './auth-callbacks';  
 
 declare module "next-auth" {
     interface User {
@@ -17,15 +17,15 @@ declare module "next-auth" {
 }
 
 export const authOptions: AuthOptions = {
-    providers: [credentialsProvider],  // Utilisation du provider importé
+    providers: [credentialsProvider],
     pages: {
         signIn: '/login',
         error: '/login',
         signOut: '/login'
     },
     callbacks: {
-        jwt: jwtCallback,  // Utilisation du callback JWT
-        session: sessionCallback  // Utilisation du callback session
+        jwt: jwtCallback,
+        session: sessionCallback 
     },
     secret: process.env.NEXTAUTH_SECRET
 };

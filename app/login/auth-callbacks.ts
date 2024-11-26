@@ -1,4 +1,3 @@
-// /lib/auth-callbacks.ts
 import { JWT } from 'next-auth/jwt';
 import { Session } from 'next-auth';
 
@@ -12,7 +11,6 @@ interface CustomUser {
     apiKey: string;
 }
 
-// Callback JWT pour gérer les informations supplémentaires dans le token
 export const jwtCallback = async ({
     token,
     user,
@@ -27,7 +25,6 @@ export const jwtCallback = async ({
     return token;
 };
 
-// Callback session pour gérer les informations dans la session
 export const sessionCallback = async ({
     session,
     token,
