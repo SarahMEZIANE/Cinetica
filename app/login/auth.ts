@@ -1,7 +1,6 @@
 // /lib/auth.ts
 import { DefaultSession, AuthOptions } from 'next-auth';
-import { credentialsProvider } from './providers'; 
-import { jwtCallback, sessionCallback } from './auth-callbacks';  
+import CredentialsProvider from 'next-auth/providers/credentials';
 
 declare module "next-auth" {
     interface User {
@@ -12,20 +11,70 @@ declare module "next-auth" {
         user: {
             username: string;
             apiKey: string;
-        } & DefaultSession["user"];
+        } & DefaultSession["user"]
     }
 }
 
 export const authOptions: AuthOptions = {
-    providers: [credentialsProvider],
+    providers: [
+        CredentialsProvider({
+            name: 'Credentials',
+            credentials: {
+                username: { label: "Username", type: "text" },
+                password: { label: "Password", type: "password" }
+            },
+            async authorize(credentials) {
+                if (!credentials?.username || !credentials?.password) return null;
+                
+                try {
+                    const response = await fetch(`https://cinetica-one.vercel.app/api/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(credentials),
+                    });
+
+                    const data = await response.json();
+                    
+                    if (data.isAuthenticated) {
+                        return {
+                            id: '1',
+                            username: credentials.username,
+                            apiKey: process.env.TMDB_API_KEY || ''
+                        };
+                    }
+                    return null;
+                } catch {
+                    return null;
+                }
+            }
+        })
+    ],
+    jwt: {
+        maxAge: 60,
+    },
+    session: {
+        strategy: 'jwt',
+        maxAge: 60,
+    },
     pages: {
         signIn: '/login',
         error: '/login',
         signOut: '/login'
     },
     callbacks: {
-        jwt: jwtCallback,
-        session: sessionCallback 
-    },
-    secret: process.env.NEXTAUTH_SECRET
+        async jwt({ token, user }) {
+            if (user) {
+                token.username = user.username;
+                token.apiKey = user.apiKey;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (session.user) {
+                session.user.username = token.username as string;
+                session.user.apiKey = token.apiKey as string;
+            }
+            return session;
+        }
+    }
 };
