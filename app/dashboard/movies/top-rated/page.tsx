@@ -1,6 +1,8 @@
+'use client'
+
 import React, { useState, useEffect } from 'react';
 import { useTopRatedMovies } from '../../../../hooks/useTopRatedMovies';
-import MovieGrid from '../MovieList';
+import MovieGrid from '../../MovieList';
 
 const MoviesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);

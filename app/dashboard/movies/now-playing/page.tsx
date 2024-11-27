@@ -1,10 +1,12 @@
+'use client'
+
 import React, { useState, useEffect } from 'react';
-import { usePopularMovies } from '../../../../hooks/usePopularMovies';
-import MovieGrid from '../MovieList';
+import { useNowPlayingMovies } from '../../../../hooks/useNowPlayingMovies';
+import MovieGrid from '../../MovieList';
 
 const MoviesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { movies, loading, error, fetchMovies } = usePopularMovies();
+  const { movies, loading, error, fetchMovies } = useNowPlayingMovies();
 
   useEffect(() => {
     fetchMovies(currentPage);
@@ -16,7 +18,7 @@ const MoviesPage = () => {
 
   return (
     <div>
-      <h1 className="text-2xl text-center my-6">Popular Movies</h1>
+      <h1 className="text-2xl text-center my-6">Now Playing Movies</h1>
       <MovieGrid fetchMovies={ fetchMovies }  movies={movies} loading={loading} error={error} />
 
       <div className="flex justify-center mt-6 space-x-4 p-4">

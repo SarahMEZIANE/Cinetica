@@ -1,6 +1,9 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
 import { navItems } from "@/app/dashboard/navItems";
 import { X, LogOut } from "lucide-react";
+import { useRouter } from 'next/navigation';
 
 export const Sidebar = ({
   sidebarOpen,
@@ -13,6 +16,12 @@ export const Sidebar = ({
   active: string;
   setActive: (value: string) => void;
 }) => {
+  const router = useRouter();
+
+    const navigate = (path: string) => {
+        router.push(path);
+    };
+
   return (
     <div className="flex">
         <aside
@@ -31,7 +40,7 @@ export const Sidebar = ({
               .map(item => (
                 <Button
                   key={`${item.section}-${item.name}`}
-                  onClick={() => setActive(`${item.section}-${item.name}`)}
+                  onClick={() => {setActive(`${item.section}-${item.name}`); }}
                   className={`hover:bg-[#fec04b] hover:text-white bg-white text-black dark:text-white dark:bg-[#494949] justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
                     active === `${item.section}-${item.name}`
                       ? "bg-[#fec04b] text-gray-900 dark:bg-[#fec04b] dark:text-gray-900"
@@ -51,7 +60,7 @@ export const Sidebar = ({
               .map(item => (
                 <Button
                   key={`${item.section}-${item.name}`}
-                  onClick={() => setActive(`${item.section}-${item.name}`)}
+                  onClick={() => {setActive(`${item.section}-${item.name}`); navigate(`/dashboard/movies/${item.name}`);}}
                   className={`hover:bg-[#fec04b] hover:text-white bg-white text-black dark:text-white dark:bg-[#494949] justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
                     active === `${item.section}-${item.name}`
                       ? "bg-[#fec04b] text-gray-900 dark:bg-[#fec04b] dark:text-gray-900"
@@ -67,11 +76,11 @@ export const Sidebar = ({
           <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-400 px-4 mt-4">TV Shows</h3>
           <nav className="flex flex-col space-y-2 flex-grow">
             {navItems
-              .filter(item => item.section === "tv")
+              .filter(item => item.section === "shows")
               .map(item => (
                 <Button
                   key={`${item.section}-${item.name}`}
-                  onClick={() => setActive(`${item.section}-${item.name}`)}
+                  onClick={() => {setActive(`${item.section}-${item.name}`);}}
                   className={`hover:bg-[#fec04b] hover:text-white bg-white text-black dark:text-white dark:bg-[#494949] justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
                     active === `${item.section}-${item.name}`
                       ? "bg-[#fec04b] text-gray-900 dark:bg-[#fec04b] dark:text-gray-900"
