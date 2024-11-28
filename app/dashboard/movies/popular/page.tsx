@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { usePopularMovies } from '../../../../hooks/usePopularMovies';
-import MovieGrid from '../../MovieList';
+import MovieGrid from '../../MoviesList';
 
 const MoviesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);

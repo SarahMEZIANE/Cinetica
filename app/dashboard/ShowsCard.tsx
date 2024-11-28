@@ -1,14 +1,14 @@
 import React from 'react';
 import { StarIcon } from '@heroicons/react/24/solid';
 
-interface MovieCardProps {
-  title: string;
+interface ShowsCardProps {
+  name: string;
   posterPath: string;
   overview: string;
   rating: number; 
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ title, posterPath, rating }) => {
+const ShowsCard: React.FC<ShowsCardProps> = ({ name, posterPath, rating }) => {
   
   const posterUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
 
@@ -16,7 +16,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ title, posterPath, rating }) => {
     <div className="relative group cursor-pointer w-full max-w-xs mx-auto rounded-lg overflow-hidden shadow-lg">
       <img 
         src={posterUrl} 
-        alt={title} 
+        alt={name} 
         className="w-full h-auto rounded-lg transition-transform transform group-hover:scale-105"
       />
 
@@ -26,10 +26,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ title, posterPath, rating }) => {
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-        <h3 className="text-white font-semibold text-lg truncate">{title}</h3>
+        <h3 className="text-white font-semibold text-lg truncate">{name}</h3>
       </div>
     </div>
   );
 };
 
-export default MovieCard;
+export default ShowsCard;

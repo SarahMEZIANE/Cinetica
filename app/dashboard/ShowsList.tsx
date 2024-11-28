@@ -1,14 +1,14 @@
-import MovieCard from './MovieCard';
-import { Movie } from '@/app/entites/Movie';
+import { TVShow } from '@/app/entites/TVShow';
+import ShowsCard from './ShowsCard';
 
-interface MovieGridProps {
-  movies: Movie[];
+interface ShowsGridProps {
+  shows: TVShow[];
   loading: boolean;
   error: string | null;
-  fetchMovies: (page: number) => void;
+  fetchShows: (page: number) => void;
 }
 
-const MovieGrid: React.FC<MovieGridProps> = ({ movies, loading, error }) => {
+const ShowsGrid: React.FC<ShowsGridProps> = ({ shows, loading, error }) => {
 
   return (
     <div className="relative">
@@ -23,13 +23,13 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, loading, error }) => {
       ) : (
         <>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4 mx-auto">
-            {movies.map((movie) => (
-              <MovieCard 
-                key={movie.id} 
-                title={movie.title} 
-                posterPath={movie.poster_path} 
-                overview={movie.overview} 
-                rating={movie.vote_average}
+            {shows.map((show) => (
+              <ShowsCard 
+                key={show.id} 
+                name={show.name} 
+                posterPath={show.poster_path} 
+                overview={show.overview} 
+                rating={show.vote_average}
               />
             ))}
           </div>
@@ -39,4 +39,4 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, loading, error }) => {
   );
 };
 
-export default MovieGrid;
+export default ShowsGrid;

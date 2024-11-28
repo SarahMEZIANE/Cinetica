@@ -24,6 +24,7 @@ export function useNowPlayingMovies() {
           overview: movie.overview,
           release_date: movie.release_date,
           poster_path: movie.poster_path,
+          backdrop_path: movie.backdrop_path,
           vote_average: movie.vote_average,
           popularity: movie.popularity,
         }))

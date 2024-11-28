@@ -1,4 +1,4 @@
-import { signIn } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Credentials from 'next-auth/providers/credentials';
@@ -42,12 +42,18 @@ export function useLogin() {
         }
     };
 
+    const handleSignOut= async (event: React.FormEvent) => {
+        event.preventDefault();
+        signOut();
+    };
+    
     return {
       username,
       setUsername,
       password,
       setPassword,
       error,
-      handleSubmit
+      handleSubmit,
+      handleSignOut
     };
 }

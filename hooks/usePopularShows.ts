@@ -20,7 +20,7 @@ export function usePopularShows() {
       setShows(
         showsData.results.map((show: TVShow) => ({
           id: show.id,
-          title: show.title,
+          name: show.name,
           overview: show.overview,
           release_date: show.release_date,
           poster_path: show.poster_path,

@@ -10,11 +10,14 @@ export const Sidebar = ({
   toggleSidebar,
   active,
   setActive,
+  handleSignOut,
+
 }: {
   sidebarOpen: boolean;
   toggleSidebar: () => void;
   active: string;
   setActive: (value: string) => void;
+  handleSignOut: (event: React.FormEvent) => Promise<void>;
 }) => {
   const router = useRouter();
 
@@ -95,7 +98,7 @@ export const Sidebar = ({
           </nav>
           <div className="pt-40 flex-shrink-0">
             <Button
-              onClick={() => setActive("logout")}
+              onClick={ handleSignOut }
               className="hover:bg-[#fec04b] hover:text-white bg-white text-black dark:text-white dark:bg-[#494949] sm:justify-start text-left sm:flex items-center space-x-3 sm:px-4 sm:py-3 rounded-lg"
             >
               <LogOut className="w-5 h-5" />

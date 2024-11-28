@@ -1,35 +1,37 @@
+import { StarIcon } from 'lucide-react';
 import React from 'react';
 
 interface MovieDetailsModalProps {
   title: string;
-  bannerPath: string;
   overview: string;
-  cast: { name: string; profilePath: string }[]; // Liste des acteurs
+  release_date: string;
+  posterPath: string;
+  rating: number;
   onClose: () => void;
 }
 
 const MovieDetailsModal: React.FC<MovieDetailsModalProps> = ({
   title,
-  bannerPath,
+  posterPath,
   overview,
-  cast,
+  release_date,
+  rating,
   onClose,
 }) => {
-  const bannerUrl = `https://image.tmdb.org/t/p/original${bannerPath}`;
+  const bannerUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden max-w-4xl w-full relative shadow-xl">
-        {/* Bouton de fermeture */}
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-40">
+      <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden max-w-4xl w-full relative shadow-xl m-5">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 focus:outline-none"
+          className="absolute z-50 top-4 right-4 bg-transparent text-white rounded-full p-2 focus:outline-none"
         >
-          ✕
+          <br />
+          X
         </button>
-
-        {/* Bannière */}
-        <div className="relative h-64">
+      <div className='overflow-y-scroll'>
+        <div className="relative ">
           <img
             src={bannerUrl}
             alt={title}
@@ -39,28 +41,25 @@ const MovieDetailsModal: React.FC<MovieDetailsModalProps> = ({
             <h2 className="text-white text-2xl font-bold">{title}</h2>
           </div>
         </div>
-
-        {/* Détails */}
-        <div className="p-6 space-y-4">
-          <p className="text-gray-700 dark:text-gray-300">{overview}</p>
-
-          {/* Acteurs */}
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Cast</h3>
-            <div className="flex space-x-4 overflow-x-auto">
-              {cast.map((actor, index) => (
-                <div key={index} className="flex flex-col items-center">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200${actor.profilePath}`}
-                    alt={actor.name}
-                    className="w-16 h-16 rounded-full object-cover"
-                  />
-                  <p className="text-sm mt-2 text-center">{actor.name}</p>
-                </div>
-              ))}
-            </div>
+        <div className="flex p-6 space-y-4">
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold mb-2">Release Date: {release_date}</h3>
+          </div>
+          <div className=" flex items-center bg-yellow-500 text-white text-sm font-bold px-2 py-1 rounded-full shadow-lg">
+            <StarIcon className="w-4 h-4 mr-1" />
+            {rating.toFixed(1)}
           </div>
         </div>
+
+        <div className="p-6 space-y-4 " >
+        <h3>Overview </h3>
+          <p className="text-gray-700 dark:text-gray-300">{overview}</p>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Cast</h3>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   );

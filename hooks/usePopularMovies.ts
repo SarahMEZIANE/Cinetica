@@ -22,6 +22,7 @@ export function usePopularMovies() {
           id: movie.id,
           title: movie.title,
           overview: movie.overview,
+          backdrop_path: movie.backdrop_path,
           release_date: movie.release_date,
           poster_path: movie.poster_path,
           vote_average: movie.vote_average,

@@ -19,11 +19,11 @@ declare module "next-auth" {
 export const authOptions: AuthOptions = {
     providers: [credentialsProvider],
     jwt: {
-        maxAge: 60,
+        maxAge: 1800,
     },
     session: {
         strategy: 'jwt',
-        maxAge: 60,
+        maxAge: 1800,
     },
     pages: {
         signIn: '/login',

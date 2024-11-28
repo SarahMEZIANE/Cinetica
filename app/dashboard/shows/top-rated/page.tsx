@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTopRatedShows } from '../../../../hooks/useTopRatedShows';
-import MovieGrid from '../../MovieList';
+import ShowsGrid from '../../ShowsList';
 
 const ShowsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,7 +19,7 @@ const ShowsPage = () => {
   return (
     <div>
       <h1 className="text-2xl text-center my-6">Top rated TV SHOWS</h1>
-      <MovieGrid fetchMovies={ fetchShows }  movies={shows} loading={loading} error={error} />
+      <ShowsGrid fetchShows={ fetchShows }  shows={shows} loading={loading} error={error} />
 
       <div className="flex justify-center mt-6 space-x-4 p-4">
         <button
