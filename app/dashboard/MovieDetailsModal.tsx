@@ -21,7 +21,7 @@ const MovieDetailsModal: React.FC<MovieDetailsModalProps> = ({
   const bannerUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-40">
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-40 overflow-y-scroll">
       <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden max-w-4xl w-full relative shadow-xl m-5">
         <button
           onClick={onClose}
@@ -30,7 +30,7 @@ const MovieDetailsModal: React.FC<MovieDetailsModalProps> = ({
           <br />
           X
         </button>
-      <div className='overflow-y-scroll'>
+      <div className=''>
         <div className="relative ">
           <img
             src={bannerUrl}
