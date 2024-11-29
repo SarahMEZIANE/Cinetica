@@ -1,3 +1,4 @@
+import Person from "./Person";
 
 export interface TVShow {
     id: number;
@@ -8,6 +9,7 @@ export interface TVShow {
     vote_average: number;
     popularity: number;
     backdrop_path: string;
+    cast:Person[];
   }
 
 export default TVShow;

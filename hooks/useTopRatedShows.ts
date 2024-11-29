@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { TVShow } from '@/app/entites/TVShow';
+import Person from '@/app/entites/Person';
 
 export function useTopRatedShows() {
   const [shows, setShows] = useState<TVShow[]>([]);
@@ -17,18 +18,26 @@ export function useTopRatedShows() {
         return;
       }
 
-      setShows(
-        showsData.results.map((show: TVShow) => ({
-          id: show.id,
-          name: show.name,
-          overview: show.overview,
-          first_air_date: show.first_air_date,
-          poster_path: show.poster_path,
-          vote_average: show.vote_average,
-          popularity: show.popularity,
-          backdrop_path: show.backdrop_path
-        }))
-      );
+      const tmpShows=showsData.results.map((show: TVShow) => ({
+        id: show.id,
+        name: show.name,
+        overview: show.overview,
+        first_air_date: show.first_air_date,
+        poster_path: show.poster_path,
+        vote_average: show.vote_average,
+        popularity: show.popularity,
+        backdrop_path: show.backdrop_path,
+        cast: show.cast.map((person: Person): Person => ({
+          id: person.id,
+          name: person.name,
+          profile_path: person.profile_path,
+          job: person.job,
+          character: person.character,
+          order: person.order,
+        })),
+        director: null,
+      }));
+      setShows(tmpShows);
     } catch (err) {
       console.error('Error fetching movies:', err);
       setError('An error occurred while fetching the movies');
