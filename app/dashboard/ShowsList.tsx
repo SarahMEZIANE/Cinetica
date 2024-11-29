@@ -7,7 +7,7 @@ interface ShowsGridProps {
   shows: TVShow[];
   loading: boolean;
   error: string | null;
-  fetchMovies: (page: number) => void;
+  fetchShows: (page: number) => void;
 }
 
 const ShowsGrid: React.FC<ShowsGridProps> = ({ shows, loading, error }) => {
