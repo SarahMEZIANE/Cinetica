@@ -8,6 +8,7 @@ const Header = ({
   sidebarOpen: boolean;
   toggleSidebar: () => void;
 }) => {
+
   return (
     <header className="flex items-center justify-between px-6 py-2 bg-white dark:bg-[#333333] text-gray-800 dark:text-gray-200 shadow-lg">
       <div className="flex items-center space-x-4">

@@ -59,6 +59,7 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, loading, error }) => {
               onClose={handleCloseModal}
               rating={selectedMovie.vote_average}
               release_date={selectedMovie.release_date}
+              cast={selectedMovie.cast}
             />
           )}
         </>

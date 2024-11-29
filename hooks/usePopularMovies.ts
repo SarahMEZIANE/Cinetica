@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Movie } from '@/app/entites/Movie';
+import Person from '@/app/entites/Person';
 
 export function usePopularMovies() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -17,18 +18,28 @@ export function usePopularMovies() {
         return;
       }
 
-      setMovies(
-        moviesData.results.map((movie: Movie) => ({
-          id: movie.id,
-          title: movie.title,
-          overview: movie.overview,
-          backdrop_path: movie.backdrop_path,
-          release_date: movie.release_date,
-          poster_path: movie.poster_path,
-          vote_average: movie.vote_average,
-          popularity: movie.popularity,
-        }))
-      );
+      
+      const movies = moviesData.results.map((movie: Movie) => ({
+        id: movie.id,
+        title: movie.title,
+        overview: movie.overview,
+        release_date: movie.release_date,
+        poster_path: movie.poster_path,
+        backdrop_path: movie.backdrop_path,
+        vote_average: movie.vote_average,
+        popularity: movie.popularity,
+        cast: movie.cast.map((person: Person): Person => ({
+          id: person.id,
+          name: person.name,
+          profile_path: person.profile_path,
+          job: person.job,
+          character: person.character,
+          order: person.order,
+        })),
+        director: null,
+      }));
+
+      setMovies(movies);
     } catch (err) {
       console.error('Error fetching movies:', err);
       setError('An error occurred while fetching the movies');

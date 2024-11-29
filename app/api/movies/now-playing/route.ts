@@ -1,6 +1,9 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from '@/app/login/auth';
 import { NextResponse } from 'next/server';
+import Movie from "@/app/entites/Movie";
+import Person from "@/app/entites/Person";
+
 
 export async function GET(req: Request) {
     const url = new URL(req.url);
@@ -13,6 +16,7 @@ export async function GET(req: Request) {
     }
 
     try {
+        // Étape 1 : Obtenir la liste des films actuellement en salle
         const response = await fetch(
             `https://api.themoviedb.org/3/movie/now_playing?api_key=${mysession.user.apiKey}&language=en-US&page=${page}`
         );
@@ -22,8 +26,30 @@ export async function GET(req: Request) {
         }
 
         const data = await response.json();
-        return NextResponse.json(data);
-    } catch {
+
+        const moviesWithCredits = await Promise.all(
+            data.results.map(async (movie: Movie) => {
+                const creditsResponse = await fetch(
+                    `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${mysession.user.apiKey}&language=en-US`
+                );
+
+                if (!creditsResponse.ok) {
+                    return { ...movie, creditsError: true };
+                }
+
+                const creditsData = await creditsResponse.json();
+
+                return {
+                    ...movie,
+                    cast: creditsData.cast.slice(0, 10000),
+                    director: creditsData.crew.find((crew: Person) => crew.job === "Director"),
+                };
+            })
+        );
+
+        return NextResponse.json({ results: moviesWithCredits });
+    } catch (error) {
+        console.error(error);
         return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
     }
 }

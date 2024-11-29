@@ -22,10 +22,11 @@ export function usePopularShows() {
           id: show.id,
           name: show.name,
           overview: show.overview,
-          release_date: show.release_date,
+          first_air_date: show.first_air_date,
           poster_path: show.poster_path,
           vote_average: show.vote_average,
           popularity: show.popularity,
+          backdrop_path: show.backdrop_path
         }))
       );
     } catch (err) {

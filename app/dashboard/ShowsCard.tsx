@@ -2,10 +2,11 @@ import React from 'react';
 import { StarIcon } from '@heroicons/react/24/solid';
 
 interface ShowsCardProps {
-  name: string;
-  posterPath: string;
-  overview: string;
-  rating: number; 
+    name: string;
+    overview: string;
+    first_air_date: string;
+    posterPath: string;
+    rating: number;
 }
 
 const ShowsCard: React.FC<ShowsCardProps> = ({ name, posterPath, rating }) => {
