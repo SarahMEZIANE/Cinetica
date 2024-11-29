@@ -1,20 +1,14 @@
-import React, { useRef } from 'react';
+import React, { RefObject } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import Person from '../entites/Person';
 
 interface CastSliderProps {
   cast: Person[];
+  scroll:  (direction: "left" | "right") => void;
+  sliderRef: RefObject<HTMLDivElement>;
 }
 
-const CastSlider: React.FC<CastSliderProps> = ({ cast }) => {
-  const sliderRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (sliderRef.current) {
-      const scrollAmount = 200;
-      sliderRef.current.scrollLeft += direction === 'left' ? -scrollAmount : scrollAmount;
-    }
-  };
+const CastSlider: React.FC<CastSliderProps> = ({ cast, scroll, sliderRef}) => {
 
   return (
     <div className="relative">

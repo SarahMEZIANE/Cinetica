@@ -2,6 +2,7 @@ import { StarIcon, X } from 'lucide-react';
 import React from 'react';
 import CastSlider from './CastSlider';
 import Person from '../entites/Person';
+import useCastSlider from '@/hooks/useCastSlider';
 
 interface ShowsDetailsModalProps {
   name: string;
@@ -23,7 +24,7 @@ const ShowsDetailsModal: React.FC<ShowsDetailsModalProps> = ({
   cast = []
 }) => {
   const bannerUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
-
+  const {scroll: scroll, sliderRef: sliderRef} = useCastSlider()
   return (
     <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-start z-40 overflow-y-auto p-4">
       <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden max-w-4xl w-full relative shadow-xl my-8">
@@ -60,7 +61,7 @@ const ShowsDetailsModal: React.FC<ShowsDetailsModalProps> = ({
 
           <div>
             <h3 className="text-xl font-semibold mb-4 dark:text-white">Cast</h3>
-            <CastSlider cast={cast} />
+            <CastSlider cast={cast} scroll={scroll} sliderRef={sliderRef}  />
           </div>
         </div>
       </div>
