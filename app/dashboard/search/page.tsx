@@ -29,8 +29,8 @@ const DashboardPage = () => {
       }
 
       const data = await response.json();
-      setMovies(data.results.filter((result: any): result is Movie => result.media_type === "movie"));
-      setShows(data.results.filter((result: any): result is TVShow => result.media_type === "tv"));
+      setMovies(data.results.filter((result: Movie): result is Movie => result.media_type === "movie"));
+      setShows(data.results.filter((result: TVShow): result is TVShow => result.media_type === "tv"));
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
