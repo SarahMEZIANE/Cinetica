@@ -1,7 +1,7 @@
 import { StarIcon, X } from 'lucide-react';
 import React from 'react';
-import CastSlider from './CastSlider';
-import Person from '../entites/Person';
+import CastSlider from '../CastSlider';
+import Person from '../../entites/Person';
 import useCastSlider from '@/hooks/useCastSlider';
 
 interface ShowsDetailsModalProps {

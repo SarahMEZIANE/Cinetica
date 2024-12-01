@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useOnTheAirShows } from '../../../../hooks/useOnTheAirShows';
-import ShowsGrid from '../../ShowsList';
+import ShowsGrid from '../ShowsList';
+import { Tv } from 'lucide-react';
 
 const ShowsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,7 +19,7 @@ const ShowsPage = () => {
 
   return (
     <div>
-      <h1 className="text-2xl text-center my-6">On the air TV SHOWS</h1>
+      <h1 className="text-2xl my-6 flex"> <Tv className="w-6 h-6 mr-5" /> On The Air TV SHOWS</h1>
       <ShowsGrid fetchShows={ fetchShows }  shows={shows} loading={loading} error={error} />
 
       <div className="flex justify-center mt-6 space-x-4 p-4">

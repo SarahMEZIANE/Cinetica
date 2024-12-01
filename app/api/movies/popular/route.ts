@@ -16,7 +16,6 @@ export async function GET(req: Request) {
     }
 
     try {
-        // Étape 1 : Obtenir la liste des films actuellement en salle
         const response = await fetch(
             `https://api.themoviedb.org/3/movie/popular?api_key=${mysession.user.apiKey}&language=en-US&page=${page}`
         );
