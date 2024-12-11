@@ -27,11 +27,13 @@ const MovieSlider: React.FC<ShowSliderProps> = ({ title, shows }) => {
           {shows.map((show: TVShow) => (
             <div key={show.id} className="flex-none w-[160px]">
               <ShowCard
-                name={show.name}
-                overview={show.overview}
-                first_air_date={show.first_air_date}
-                posterPath={show.poster_path}
+                name={show.name} 
+                posterPath={show.poster_path} 
+                overview={show.overview} 
                 rating={show.vote_average}
+                first_air_date={show.first_air_date}
+                trailer={show.trailer}
+                cast={show.cast}
               />
             </div>
           ))}
