@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TVShow } from '@/app/entites/TVShow';
+import { ShowVideo, TVShow } from '@/app/entites/TVShow';
 import Person from '@/app/entites/Person';
 
 export function usePopularShows() {
@@ -38,7 +38,18 @@ export function usePopularShows() {
           })),
           director: null,
         }));
-        setShows(tmpShows);
+        const showsWithTrailers = await Promise.all(
+          tmpShows.map(async (show: TVShow) => {
+            const videos = await fetch(`/api/shows/video?showID=${show.id}`);
+            const v= await videos.json();
+            const trailer = v.results.find(
+              (video:ShowVideo) => video.type.toLowerCase() === 'trailer' && 
+              video.site.toLowerCase() === 'youtube'
+            );
+            return { ...show, trailer };
+          })
+        );
+        setShows(showsWithTrailers);
       
     } catch (err) {
       console.error('Error fetching movies:', err);

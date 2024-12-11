@@ -30,6 +30,7 @@ const CastSlider: React.FC<CastSliderProps> = ({ cast, scroll, sliderRef}) => {
             className="flex-none w-[160px]"
           >
             <div className="bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden">
+              
               <img
                 src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
                 alt={actor.name}

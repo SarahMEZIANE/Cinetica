@@ -60,6 +60,7 @@ const ShowsGrid: React.FC<ShowsGridProps> = ({ shows, loading, error }) => {
               rating={selectedShow.vote_average}
               first_air_date={selectedShow.first_air_date}
               cast={selectedShow.cast}
+              trailer={selectedShow.trailer}
             />
           )}
         </>

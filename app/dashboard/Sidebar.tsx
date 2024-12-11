@@ -43,7 +43,7 @@ export const Sidebar = ({
               .map(item => (
                 <Button
                   key={`${item.section}-${item.name}`}
-                  onClick={() => {setActive(`${item.section}-${item.name}`); }}
+                  onClick={() => {setActive(`${item.section}-${item.name}`); navigate(`/dashboard`); }}
                   className={`hover:bg-[#fec04b] hover:text-white bg-white text-black dark:text-white dark:bg-[#494949] justify-start text-left flex items-center space-x-3 px-4 py-3 rounded-lg ${
                     active === `${item.section}-${item.name}`
                       ? "bg-[#fec04b] text-gray-900 dark:bg-[#fec04b] dark:text-gray-900"

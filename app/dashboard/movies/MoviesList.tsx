@@ -60,6 +60,7 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, loading, error }) => {
               rating={selectedMovie.vote_average}
               release_date={selectedMovie.release_date}
               cast={selectedMovie.cast}
+              trailer={selectedMovie.trailer}
             />
           )}
         </>

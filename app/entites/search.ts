@@ -1,23 +1,22 @@
 import Person from "./Person";
 
-export interface ShowVideo{
+export interface Video{
   id: number;
   type: string;
   key: string;
   site: string;
 }
 
-export interface TVShow {
+export interface search {
+    media_type: string;
     id: number;
-    name: string;
+    title: string;
     overview: string;
+    vote_average: number;
     first_air_date: string;
     poster_path: string;
-    vote_average: number;
-    popularity: number;
-    backdrop_path: string;
+    release_date: string;
+    name: string;
     cast:Person[];
-    trailer: ShowVideo;
-  }
-
-export default TVShow;
+    trailer: Video;
+ }

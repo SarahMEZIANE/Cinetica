@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TVShow } from '@/app/entites/TVShow';
+import { TVShow, ShowVideo } from '@/app/entites/TVShow';
 import Person from '@/app/entites/Person';
 
 export function useOnTheAirShows() {
@@ -36,7 +36,19 @@ export function useOnTheAirShows() {
         })),
         director: null,
       }));
-      setShows(tmpShows);
+      const showsWithTrailers = await Promise.all(
+        tmpShows.map(async (show: TVShow) => {
+          const videos = await fetch(`/api/shows/video?showID=${show.id}`);
+          const v= await videos.json();
+          const trailer = v.results.find(
+            (video:ShowVideo) => video.type.toLowerCase() === 'trailer' && 
+            video.site.toLowerCase() === 'youtube'
+          );
+          return { ...show, trailer };
+        })
+      );
+      console.log(showsWithTrailers);
+      setShows(showsWithTrailers);
     } catch (err) {
       console.error('Error fetching movies:', err);
       setError('An error occurred while fetching the movies');

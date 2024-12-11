@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Movie } from '@/app/entites/Movie';
+import { Movie, MovieVideo } from '@/app/entites/Movie';
 import Person from '@/app/entites/Person';
 
 export function useNowPlayingMovies() {
@@ -38,8 +38,18 @@ export function useNowPlayingMovies() {
         })),
         director: null,
       }));
-
-      setMovies(movies);
+      const moviesWithTrailers = await Promise.all(
+        movies.map(async (movie: Movie) => {
+          const videos = await fetch(`/api/movies/video?movieID=${movie.id}`);
+          const v= await videos.json();
+          const trailer = v.results.find(
+            (video:MovieVideo) => video.type.toLowerCase() === 'trailer' && 
+            video.site.toLowerCase() === 'youtube'
+          );
+          return { ...movie, trailer };
+        })
+      );
+      setMovies(moviesWithTrailers);
     } catch (err) {
       console.error('Error fetching movies:', err);
       setError('An error occurred while fetching the movies');
