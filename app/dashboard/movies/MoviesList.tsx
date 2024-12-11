@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MovieCard from './MoviesCard';
-import MovieDetailsModal from './MovieDetailsModal';
 import { Movie } from '@/app/entites/Movie';
 
 interface MovieGridProps {
@@ -11,16 +10,6 @@ interface MovieGridProps {
 }
 
 const MovieGrid: React.FC<MovieGridProps> = ({ movies, loading, error }) => {
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-
-  const handleCardClick = (movie: Movie) => {
-    setSelectedMovie(movie);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedMovie(null);
-  };
-
   return (
     <div className="relative">
       {loading ? (
@@ -37,7 +26,6 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, loading, error }) => {
             {movies.map((movie) => (
               <div 
                 key={movie.id} 
-                onClick={() => handleCardClick(movie)}
               >
                 <MovieCard 
                   title={movie.title} 
@@ -45,24 +33,12 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, loading, error }) => {
                   overview={movie.overview} 
                   rating={movie.vote_average}
                   release_date={movie.release_date}
+                  cast={movie.cast}
+                  trailer={movie.trailer}
                 />
               </div>
             ))}
           </div>
-
-          {/* Render the modal if a movie is selected */}
-          {selectedMovie && (
-            <MovieDetailsModal
-              title={selectedMovie.title}
-              posterPath={selectedMovie.backdrop_path}
-              overview={selectedMovie.overview}
-              onClose={handleCloseModal}
-              rating={selectedMovie.vote_average}
-              release_date={selectedMovie.release_date}
-              cast={selectedMovie.cast}
-              trailer={selectedMovie.trailer}
-            />
-          )}
         </>
       )}
     </div>

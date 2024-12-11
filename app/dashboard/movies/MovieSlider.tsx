@@ -32,6 +32,8 @@ const MovieSlider: React.FC<MovieSliderProps> = ({ title, movies }) => {
                 release_date={movie.release_date}
                 posterPath={movie.poster_path}
                 rating={movie.vote_average}
+                cast={movie.cast}
+                trailer={movie.trailer}
               />
             </div>
           ))}

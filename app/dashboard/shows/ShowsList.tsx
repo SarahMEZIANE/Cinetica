@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ShowsCard from './ShowsCard';
 import { TVShow } from '@/app/entites/TVShow';
-import ShowsDetailsModal from './ShowsDetailsModal';
 
 interface ShowsGridProps {
   shows: TVShow[];
@@ -11,15 +10,6 @@ interface ShowsGridProps {
 }
 
 const ShowsGrid: React.FC<ShowsGridProps> = ({ shows, loading, error }) => {
-  const [selectedShow, setselectedShow] = useState<TVShow | null>(null);
-
-  const handleCardClick = (show: TVShow) => {
-    setselectedShow(show);
-  };
-
-  const handleCloseModal = () => {
-    setselectedShow(null);
-  };
 
   return (
     <div className="relative">
@@ -37,7 +27,6 @@ const ShowsGrid: React.FC<ShowsGridProps> = ({ shows, loading, error }) => {
             {shows.map((show) => (
               <div 
                 key={show.id} 
-                onClick={() => handleCardClick(show)}
               >
                 <ShowsCard 
                   name={show.name} 
@@ -45,24 +34,12 @@ const ShowsGrid: React.FC<ShowsGridProps> = ({ shows, loading, error }) => {
                   overview={show.overview} 
                   rating={show.vote_average}
                   first_air_date={show.first_air_date}
+                  trailer={show.trailer}
+                  cast={show.cast}
                 />
               </div>
             ))}
           </div>
-
-          {/* Render the modal if a movie is selected */}
-          {selectedShow && (
-            <ShowsDetailsModal
-              name={selectedShow.name}
-              posterPath={selectedShow.backdrop_path}
-              overview={selectedShow.overview}
-              onClose={handleCloseModal}
-              rating={selectedShow.vote_average}
-              first_air_date={selectedShow.first_air_date}
-              cast={selectedShow.cast}
-              trailer={selectedShow.trailer}
-            />
-          )}
         </>
       )}
     </div>
