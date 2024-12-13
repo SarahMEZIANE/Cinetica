@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StarIcon } from 'lucide-react';
 import MovieDetailsModal from './MovieDetailsModal';
 import { MovieVideo } from '@/app/entites/Movie';
 import Person from '@/app/entites/Person';
+import { useCard } from "@/hooks/useCard";
 
 interface MovieCardProps {
   title: string;
@@ -23,7 +24,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
   cast = [],
   trailer
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {isModalOpen, setIsModalOpen} = useCard();
   const imageUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
   return (
     <>

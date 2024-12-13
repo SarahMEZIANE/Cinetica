@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useCard } from "@/hooks/useCard";
 import { StarIcon } from 'lucide-react';
 import Person from '@/app/entites/Person';
 import ShowsDetailsModal from './ShowsDetailsModal';
@@ -23,7 +24,7 @@ const ShowsCard: React.FC<ShowCardProps> = ({
   cast = [],
   trailer
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {isModalOpen, setIsModalOpen} = useCard();
   const imageUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
   return (
     <>
