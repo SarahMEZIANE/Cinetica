@@ -24,7 +24,7 @@ const CastSlider: React.FC<CastSliderProps> = ({ cast, scroll, sliderRef}) => {
         className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth py-4 px-8"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {cast.map((actor) => (
+        {cast && cast.map((actor) => (
           <div
             key={actor.id}
             className="flex-none w-[160px]"

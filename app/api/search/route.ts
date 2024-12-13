@@ -20,7 +20,6 @@ export async function GET(req: Request) {
     }
 
     try {
-        // Initial search request
         const searchResponse = await fetch(
             `https://api.themoviedb.org/3/search/multi?include_adult=false&api_key=${mysession.user.apiKey}&language=en-US&page=${page}&query=${encodeURIComponent(query)}`
         );
@@ -30,30 +29,18 @@ export async function GET(req: Request) {
         }
 
         const searchData = await searchResponse.json();
-
-        // Enhance results with additional details
+    
         const enhancedResults = await Promise.all(
             searchData.results.map(async (item: search) => {
-                // Skip additional fetches for person results
-                if (item.media_type === 'person') {
-                    return item;
-                }
 
-                const mediaType = item.media_type; // 'movie' or 'tv'
+                const mediaType = item.media_type;
                 const id = item.id;
 
-                // Fetch credits
                 const creditsResponse = await fetch(
                     `https://api.themoviedb.org/3/${mediaType}/${id}/credits?api_key=${mysession.user.apiKey}&language=en-US`
                 );
 
-                // Fetch videos (for trailers)
-                const videosResponse = await fetch(
-                    `https://api.themoviedb.org/3/${mediaType}/${id}/videos?api_key=${mysession.user.apiKey}&language=en-US`
-                );
-
                 let credits = {};
-                let videos = {};
 
                 if (creditsResponse.ok) {
                     const creditsData = await creditsResponse.json();
@@ -65,24 +52,16 @@ export async function GET(req: Request) {
                     };
                 }
 
-                if (videosResponse.ok) {
-                    const videosData = await videosResponse.json();
-                    videos = {
-                        videos: videosData.results
-                    };
-                }
-
                 return {
                     ...item,
                     ...credits,
-                    ...videos
                 };
             })
         );
 
         return NextResponse.json({
             ...searchData,
-            results: enhancedResults
+            results: enhancedResults.filter((item: search) => item.media_type === 'movie' || item.media_type === 'tv')
         });
     } catch (error) {
         console.error('Search error:', error);

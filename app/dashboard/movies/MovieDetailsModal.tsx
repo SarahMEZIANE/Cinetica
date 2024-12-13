@@ -31,7 +31,7 @@ const MovieDetailsModal: React.FC<MovieDetailsModalProps> = ({
   
   return (
     <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-start z-40 overflow-y-auto p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden max-w-4xl w-full relative shadow-xl my-8">
+      <div className="bg-white dark:bg-[#494949] rounded-lg overflow-hidden max-w-4xl w-full relative shadow-xl my-8">
         <button
           onClick={onClose}
           className="absolute z-50 top-4 right-4 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors"

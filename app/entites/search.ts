@@ -15,6 +15,7 @@ export interface search {
     vote_average: number;
     first_air_date: string;
     poster_path: string;
+    backdrop_path: string;
     release_date: string;
     name: string;
     cast:Person[];
