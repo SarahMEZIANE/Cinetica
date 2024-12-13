@@ -13,7 +13,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-[#494949]">
       <Suspense fallback={<div>Loading...</div>}>
       <Header sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-      </Suspense>
       <div className="flex flex-1">
         <Sidebar
           sidebarOpen={sidebarOpen}
@@ -26,6 +25,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             {children}
         </main>
       </div>
+      </Suspense>
     </div>
   );
 };
