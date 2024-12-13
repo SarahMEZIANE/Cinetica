@@ -13,9 +13,9 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, loading, error }) => {
   return (
     <div className="relative">
       {loading ? (
-        <div className="flex items-center justify-center h-64">
-          <div className="w-10 h-10 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>
+        <div className="flex items-center justify-center min-h-[200px]">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-yellow-500 " />
+      </div>
       ) : error ? (
         <div className="flex items-center justify-center h-64">
           <p className="text-red-500 font-semibold">{error}</p>
