@@ -1,21 +1,15 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useOnTheAirShows } from '../../../../hooks/useOnTheAirShows';
+import { usePage } from '../../../../hooks/usePage';
+
 import ShowsGrid from '../ShowsList';
 import { Tv } from 'lucide-react';
 
 const ShowsPage = () => {
-  const [currentPage, setCurrentPage] = useState(1);
   const { shows, loading, error, fetchShows } = useOnTheAirShows();
-
-  useEffect(() => {
-    fetchShows(currentPage);
-  }, [currentPage]);
-
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
+  const { currentPage, handlePageChange } = usePage(fetchShows);
 
   return (
     <div>
