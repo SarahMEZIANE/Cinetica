@@ -21,25 +21,10 @@ export default function Page() {
 
   useEffect(() => {
     fetchPopularMovies(1);
-  }, []);
-
-  useEffect(() => {
     fetchTopRatedMovies(1);
-  }, []);
-
-  useEffect(() => {
     fetchNowPlayingMovies(1);
-  }, []);
-
-  useEffect(() => {
     fetchOnTheAirShow(1);
-  }, []);
-
-  useEffect(() => {
     fetchTopRatedShow(1);
-  }, []);
-
-  useEffect(() => {
     fetchPopularShow(1);
   }, []);
 

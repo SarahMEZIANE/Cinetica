@@ -1,21 +1,14 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { usePopularMovies } from '../../../../hooks/usePopularMovies';
+import { usePage } from '../../../../hooks/usePage';
 import MovieGrid from '../MoviesList';
 import { Film } from 'lucide-react';
 
 const MoviesPage = () => {
-  const [currentPage, setCurrentPage] = useState(1);
   const { movies, loading, error, fetchMovies } = usePopularMovies();
-
-  useEffect(() => {
-    fetchMovies(currentPage);
-  }, [currentPage]);
-
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
+  const { currentPage, handlePageChange } = usePage(fetchMovies);
 
   return (
     <div>
