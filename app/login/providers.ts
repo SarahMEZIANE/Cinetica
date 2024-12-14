@@ -1,6 +1,12 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 
-export const credentialsProvider = CredentialsProvider({
+export const credentialsProvider = [
+    GoogleProvider({
+        clientId: process.env.GOOGLE_CLIENT_ID!,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    CredentialsProvider({
     name: 'Credentials',
     credentials: {
         username: { label: "Username", type: "text" },
@@ -30,4 +36,4 @@ export const credentialsProvider = CredentialsProvider({
             return null;
         }
     }
-});
+})];

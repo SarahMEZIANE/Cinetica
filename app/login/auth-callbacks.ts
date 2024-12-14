@@ -1,5 +1,5 @@
 import { JWT } from 'next-auth/jwt';
-import { Session } from 'next-auth';
+import { Session, Account } from 'next-auth';
 
 interface CustomToken extends JWT {
     username?: string;
@@ -14,13 +14,19 @@ interface CustomUser {
 export const jwtCallback = async ({
     token,
     user,
+    account,
 }: {
     token: CustomToken;
     user?: CustomUser;
+    account?:Account;
 }) => {
     if (user) {
         token.username = user.username;
         token.apiKey = user.apiKey;
+    }
+    if (account?.provider === 'google') {
+        token.apiKey = process.env.TMDB_API_KEY;
+        token.username = token.email?.split('@')[0];
     }
     return token;
 };

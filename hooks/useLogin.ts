@@ -1,7 +1,6 @@
 import { signIn, signOut } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Credentials from 'next-auth/providers/credentials';
 
 interface Credentials {
     username: string;
@@ -9,11 +8,10 @@ interface Credentials {
 }
 
 export function useLogin() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const router = useRouter();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const router = useRouter();
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -29,31 +27,38 @@ export function useLogin() {
                 redirect: false,
             });
 
-            console.log("SignIn result:", result);
-
             if (result?.ok) {
                 router.push('/dashboard');
             } else {
-                setError('Identifiants incorrects');
+                setError('Incorrect credentials');
             }
         } catch (e) {
             console.error("Login error:", e);
-            setError('Erreur de connexion');
+            setError('Connection error');
         }
     };
 
-    const handleSignOut= async (event: React.FormEvent) => {
-        event.preventDefault();
-        signOut();
+    const handleGoogleSignIn = async () => {
+        try {
+            await signIn('google', { callbackUrl: '/dashboard' });
+        } catch (e) {
+            console.error("Google login error:", e);
+            setError('Google login failed');
+        }
+    };
+
+    const handleSignOut = async () => {
+        await signOut({ callbackUrl: '/login' });
     };
     
     return {
-      username,
-      setUsername,
-      password,
-      setPassword,
-      error,
-      handleSubmit,
-      handleSignOut
+        username,
+        setUsername,
+        password,
+        setPassword,
+        error,
+        handleSubmit,
+        handleGoogleSignIn,
+        handleSignOut
     };
 }
