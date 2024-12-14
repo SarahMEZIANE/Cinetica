@@ -47,21 +47,25 @@ export const authOptions: AuthOptions = {
             user,
             account,
         }: {
-            token: CustomToken;
+            token: JWT; // Utilisez le type JWT attendu par NextAuth
             user?: CustomUser;
-            account?:Account;
+            account: Account | null;
         }) => {
+            // Ajout des champs personnalisés
+            const customToken = token as CustomToken;
+
             if (user) {
-                token.username = user.username;
-                token.apiKey = user.apiKey;
+                customToken.username = (user as CustomUser).username;
+                customToken.apiKey = (user as CustomUser).apiKey;
             }
             if (account?.provider === 'google') {
-                token.apiKey = process.env.TMDB_API_KEY;
-                token.username = token.email?.split('@')[0];
+                customToken.apiKey = process.env.TMDB_API_KEY;
+                customToken.username = customToken.email?.split('@')[0];
             }
-            return token;
+            return customToken;
         },
         session: sessionCallback 
     },
     secret: process.env.NEXTAUTH_SECRET
 };
+

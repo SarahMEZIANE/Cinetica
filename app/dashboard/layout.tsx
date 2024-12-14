@@ -21,7 +21,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           setActive={setActive}
           handleSignOut={handleSignOut}
         />
-        <main className="max-w-screen-sm mx-auto sm:max-w-screen-sm md:max-w-6xl">
+        <main className="max-w-[80%] mx-auto sm:max-w-screen-sm md:max-w-6xl">
             {children}
         </main>
       </div>
