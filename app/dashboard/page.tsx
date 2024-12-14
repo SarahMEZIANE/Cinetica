@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { usePopularMovies } from '@/hooks/usePopularMovies';
 import MovieSlider from './movies/MovieSlider';
 import { useTopRatedMovies } from '@/hooks/useTopRatedMovies';
@@ -9,6 +9,8 @@ import { useOnTheAirShows } from '@/hooks/useOnTheAirShows';
 import ShowSlider from './shows/ShowSlider';
 import { useTopRatedShows } from '@/hooks/useTopRatedShows';
 import { usePopularShows } from '@/hooks/usePopularShows';
+import { useDiscover } from '@/hooks/useDiscover';
+
 
 export default function Page() {
   const { movies:popularMovies, loading:loadingPopularMovies, error:errorPopularMovies, fetchMovies:fetchPopularMovies } = usePopularMovies();
@@ -17,16 +19,10 @@ export default function Page() {
   const { shows:onTheAirShow, error:errorOnTheAirShow, fetchShows:fetchOnTheAirShow } = useOnTheAirShows();
   const { shows:topRatedShow,  error:errorTopRatedShow, fetchShows:fetchTopRatedShow } = useTopRatedShows();
   const { shows:popularShow, error:errorPopularShow, fetchShows:fetchPopularShow } = usePopularShows();
+  
+  useDiscover(fetchNowPlayingMovies,fetchPopularShow,fetchTopRatedMovies,fetchTopRatedShow, fetchOnTheAirShow, fetchPopularMovies);
 
-
-  useEffect(() => {
-    fetchPopularMovies(1);
-    fetchTopRatedMovies(1);
-    fetchNowPlayingMovies(1);
-    fetchOnTheAirShow(1);
-    fetchTopRatedShow(1);
-    fetchPopularShow(1);
-  }, []);
+  
 
   if (loadingPopularMovies) {
     return (
