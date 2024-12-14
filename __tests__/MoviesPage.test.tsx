@@ -5,7 +5,6 @@ import MoviesPage from '../app/dashboard/movies/popular/page';
 import { usePopularMovies } from '../hooks/usePopularMovies';
 import { usePage } from '../hooks/usePage';
 
-// Mock the hooks
 vi.mock('../hooks/usePopularMovies');
 vi.mock('../hooks/usePage');
 

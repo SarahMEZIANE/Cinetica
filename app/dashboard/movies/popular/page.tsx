@@ -1,19 +1,30 @@
+// app/(dashboard)/movies/page.tsx
 'use client'
 
 import React from 'react';
-import { usePopularMovies } from '../../../../hooks/usePopularMovies';
-import { usePage } from '../../../../hooks/usePage';
+import { PopularMoviesProvider, usePopularMoviesContext } from '@/contexts/PopularMoviesContext';
+import { usePage } from '@/hooks/usePage';
 import MovieGrid from '../MoviesList';
 import { Film } from 'lucide-react';
 
 const MoviesPage = () => {
-  const { movies, loading, error, fetchMovies } = usePopularMovies();
+  return (
+    <PopularMoviesProvider>
+      <MoviesPageContent />
+    </PopularMoviesProvider>
+  );
+};
+
+const MoviesPageContent = () => {
+  const { fetchMovies } = usePopularMoviesContext();
   const { currentPage, handlePageChange } = usePage(fetchMovies);
 
   return (
     <div>
-      <h1 className="text-2xl text-center my-6 flex"> <Film className="w-6 h-6 mr-5" /> Popular Movies</h1>
-      <MovieGrid fetchMovies={ fetchMovies }  movies={movies} loading={loading} error={error} />
+      <h1 className="text-2xl text-center my-6 flex">
+        <Film className="w-6 h-6 mr-5" /> Popular Movies
+      </h1>
+      <MovieGrid />
 
       <div className="flex justify-center mt-6 space-x-4 p-4">
         <button
