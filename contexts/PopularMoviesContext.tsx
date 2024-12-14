@@ -25,8 +25,5 @@ export function PopularMoviesProvider({ children }: { children: ReactNode }) {
 
 export function usePopularMoviesContext() {
   const context = useContext(PopularMoviesContext);
-  if (context === undefined) {
-    throw new Error('usePopularMoviesContext must be used within a PopularMoviesProvider');
-  }
   return context;
 }
