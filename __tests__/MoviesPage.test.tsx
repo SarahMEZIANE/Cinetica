@@ -1,10 +1,10 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, vi,expect, beforeEach, afterEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MoviesPage from '../app/dashboard/movies/popular/page';
 import { usePopularMovies } from '../hooks/usePopularMovies';
 import { usePage } from '../hooks/usePage';
-
+//var expect = (typeof require === 'undefined') ? chai.expect : require('chai').expect;
 vi.mock('../hooks/usePopularMovies');
 vi.mock('../hooks/usePage');
 
