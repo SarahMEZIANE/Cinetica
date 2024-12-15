@@ -43,12 +43,12 @@ export default function Page() {
   return (
     <div className="space-y-8 pt-2">
       <section>
-        <MovieSlider title='Popular movies' movies={popularMovies} />
-        <MovieSlider title='Top rated movies' movies={topRatedMovies} />
-        <MovieSlider title='Now Playing movies' movies={nowPlayingMovies} />
-        <ShowSlider title='On the air shows' shows={ onTheAirShow } />
-        <ShowSlider title='Top rated shows' shows={ topRatedShow } />
-        <ShowSlider title='Popular shows' shows={ popularShow } />
+        <MovieSlider title='Popular movies'route='/dashboard/movies/popular' movies={popularMovies} />
+        <MovieSlider title='Top rated movies' route='/dashboard/movies/top-rated' movies={topRatedMovies} />
+        <MovieSlider title='Now Playing movies'route='/dashboard/movies/now-playing' movies={nowPlayingMovies} />
+        <ShowSlider title='On the air shows' route='/dashboard/shows/on-the-air' shows={ onTheAirShow } />
+        <ShowSlider title='Top rated shows' route='/dashboard/shows/top-rated' shows={ topRatedShow } />
+        <ShowSlider title='Popular shows' route='/dashboard/shows/popular' shows={ popularShow } />
 
       </section>
     </div>
