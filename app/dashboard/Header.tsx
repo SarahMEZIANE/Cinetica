@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, X, Search } from "lucide-react";
 import { useSearchInput } from '@/hooks/useSearchInput';
+import { useRouter } from 'next/navigation';
 
 interface HeaderProps {
   sidebarOpen: boolean;
@@ -10,11 +11,16 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ sidebarOpen, toggleSidebar }) => {
   const { query, handleSearch } = useSearchInput();
+  const router = useRouter();
+
+  const navigate = (path: string) => {
+      router.push(path);
+  };
 
   return (
     <header className="flex items-center justify-between px-6 py-2 bg-white dark:bg-[#333333] text-gray-800 dark:text-gray-200 shadow-lg">
       <div className="flex items-center space-x-4">
-        <h2 className="text-2xl font-bold text-[#fec04b] dark:text-[#fec04b]">Cinetica</h2>
+        <h2 className="hover:cursor-pointer text-2xl font-bold text-[#fec04b] dark:text-[#fec04b]" onClick={()=>{navigate('/dashboard');}}>Cinetica</h2>
         <Button onClick={toggleSidebar} className="bg-transparent text-[#fec04b] dark:text-[#fec04b] lg:hidden">
           {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </Button>
